@@ -19,11 +19,11 @@ export default async function ReportsPage() {
           return (
             <Card key={p.id}>
               <h3 className="text-lg font-semibold">{p.name}</h3>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
                 Total: {total} · Passed: {passed} · Failed: {failed} · Blocked: {blocked}
               </p>
-              <div className="mt-3 h-2 rounded-full bg-slate-200 dark:bg-slate-800">
-                <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${passRate}%` }} />
+              <div className="mt-3 h-2 rounded-full bg-zinc-200 dark:bg-zinc-800">
+                <div className="h-2 rounded-full bg-emerald-600" style={{ width: `${passRate}%` }} />
               </div>
               <p className="mt-2 text-sm font-medium">Pass Rate: {passRate}%</p>
             </Card>

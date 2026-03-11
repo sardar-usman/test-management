@@ -19,11 +19,8 @@ export function ThemeToggle() {
   }
 
   return (
-    <button
-      onClick={toggle}
-      className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-800"
-    >
-      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+    <button onClick={toggle} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--text-body)] hover:bg-[var(--surface-2)] transition-colors duration-150">
+      {theme === "light" ? "Dark" : "Light"}
     </button>
   );
 }
