@@ -14,15 +14,15 @@ export function ActivityFeed() {
 
   return (
     <Card>
-      <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Recent Activity</h3>
+      <h3 className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Recent Activity</h3>
       <div className="space-y-2 text-sm">
         {logs.length === 0 ? (
-          <p className="text-slate-500">No recent activity.</p>
+          <p className="text-zinc-600 dark:text-zinc-300">No recent activity.</p>
         ) : (
           logs.map((log) => (
-            <div key={log.id} className="rounded-xl border border-slate-200/80 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950">
+            <div key={log.id} className="rounded-lg border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="font-medium">{log.message}</div>
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-zinc-600 dark:text-zinc-300">
                 {log.type} · {log.actor} · {new Date(log.createdAt).toLocaleString()}
               </div>
             </div>

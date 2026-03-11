@@ -2,10 +2,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function AppHeader({ title }: { title: string }) {
   return (
-    <div className="mb-6 flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white/80 px-5 py-4 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
+    <div className="mb-6 flex items-center justify-between rounded-lg border border-zinc-200 bg-white px-5 py-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
       <div>
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">SprintSynergy</p>
-        <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-300">SprintSynergy</p>
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{title}</h1>
       </div>
       <ThemeToggle />
     </div>

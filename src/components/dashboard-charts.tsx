@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts";
 import { Card } from "@/components/ui/card";
 
-const COLORS = ["#22c55e", "#ef4444", "#eab308", "#0ea5e9", "#64748b"];
+const COLORS = ["#059669", "#e11d48", "#d97706", "#0d9488", "#3f3f46"];
 
 type DashboardData = {
   byExecution: Record<string, number>;
@@ -26,7 +26,7 @@ export function DashboardCharts() {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <Card className="h-80">
-        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Execution Status Distribution</h3>
+        <h3 className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Execution Status Distribution</h3>
         <ResponsiveContainer width="100%" height="90%">
           <PieChart>
             <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={95} innerRadius={40}>
@@ -40,13 +40,13 @@ export function DashboardCharts() {
       </Card>
 
       <Card className="h-80">
-        <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-300">Test Case Workflow Status</h3>
+        <h3 className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Test Case Workflow Status</h3>
         <ResponsiveContainer width="100%" height="90%">
           <BarChart data={barData}>
             <XAxis dataKey="name" />
             <YAxis allowDecimals={false} />
             <Tooltip />
-            <Bar dataKey="value" fill="#334155" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="value" fill="#3f3f46" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
