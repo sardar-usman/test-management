@@ -22,10 +22,10 @@ export function Button({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant }) {
   const styles: Record<Variant, string> = {
-    primary: "bg-zinc-900 text-white hover:bg-zinc-800",
+    primary: "bg-zinc-700 text-white hover:bg-zinc-600",
     secondary: "bg-white text-zinc-700 border border-zinc-200 hover:bg-zinc-50",
     outline: "border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800",
-    create: "bg-zinc-900 text-white hover:bg-zinc-800",
+    create: "bg-zinc-700 text-white hover:bg-zinc-600",
     pass: "bg-emerald-600 text-white hover:bg-emerald-700",
     fail: "bg-rose-600 text-white hover:bg-rose-700",
     blocked: "bg-amber-600 text-white hover:bg-amber-700",
