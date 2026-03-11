@@ -62,6 +62,7 @@ Required:
 npm install
 npm run db:generate
 npm run db:push
+npm run db:seed
 npm run dev
 ```
 
@@ -77,6 +78,7 @@ Main entities:
 - `TestStep`
 - `TestPlanCase` (many-to-many)
 - `TestExecution` (execution history)
+- `ActivityLog` (audit/activity feed)
 
 Schema file: `prisma/schema.prisma`
 
@@ -86,8 +88,11 @@ Schema file: `prisma/schema.prisma`
 - `GET/PUT/DELETE /api/projects/:id`
 - `POST/GET /api/test-plans`
 - `POST/GET/PATCH /api/test-cases`
+- `GET/PUT/DELETE/POST /api/test-cases/:id` (POST duplicates)
 - `POST /api/test-cases/:id/execute`
 - `GET /api/test-cases/export`
+- `GET /api/dashboard`
+- `GET /api/activity`
 - `GET/POST /api/auth/[...nextauth]`
 
 ## Deploy to Vercel
@@ -96,27 +101,12 @@ Schema file: `prisma/schema.prisma`
 2. Import repo in Vercel.
 3. Add env vars from `.env.example` in Vercel Project Settings.
 4. Provision DB (Vercel Postgres or Supabase) and set `DATABASE_URL`.
-5. Run one-time migration locally or in CI:
+5. Run one-time schema apply:
    ```bash
    npm run db:push
    ```
-6. Deploy.
-
-## Notes / Suggested Next Improvements
-
-- Add full shadcn/ui component integration (`npx shadcn@latest init`) and replace base components.
-- Add toast system (sonner) and loading/empty states per list.
-- Add advanced filters for status/priority/assignee/tags.
-- Add detailed execution run UI + comments history view.
-- Add chart pages with Recharts for pass/fail trends.
-- Add validation with Zod for all API inputs.
-- Add audit logs and attachments (screenshots/evidence).
-
----
-
-If you want, I can now do **Phase 2** and implement:
-- polished shadcn UI,
-- full filter/search UX,
-- charts/reporting pages,
-- dark/light toggle,
-- and production-quality toasts + form validation.
+6. (Optional) Seed demo data:
+   ```bash
+   npm run db:seed
+   ```
+7. Deploy.
