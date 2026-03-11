@@ -2,35 +2,36 @@ type Kind = "project" | "plan" | "execution" | "priority";
 
 const map: Record<Kind, Record<string, string>> = {
   project: {
-    ACTIVE: "bg-indigo-600 text-white dark:bg-indigo-500",
-    COMPLETED: "bg-emerald-600 text-white dark:bg-emerald-500",
-    ON_HOLD: "bg-amber-600 text-white dark:bg-amber-500",
+    ACTIVE: "bg-emerald-50 text-emerald-700",
+    COMPLETED: "bg-emerald-50 text-emerald-700",
+    ON_HOLD: "bg-amber-50 text-amber-700",
   },
   plan: {
-    DRAFT: "border border-zinc-800 bg-white text-zinc-800 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100",
-    ACTIVE: "bg-indigo-600 text-white dark:bg-indigo-500",
-    COMPLETED: "bg-emerald-600 text-white dark:bg-emerald-500",
-    IN_PROGRESS: "bg-indigo-600 text-white dark:bg-indigo-500",
-    PENDING: "bg-zinc-700 text-white dark:bg-zinc-500",
+    DRAFT: "bg-zinc-100 text-zinc-600",
+    ACTIVE: "bg-emerald-50 text-emerald-700",
+    COMPLETED: "bg-emerald-50 text-emerald-700",
+    IN_PROGRESS: "bg-indigo-50 text-indigo-700",
+    PENDING: "bg-zinc-100 text-zinc-600",
   },
   execution: {
-    PASSED: "bg-emerald-600 text-white dark:bg-emerald-500",
-    FAILED: "bg-rose-600 text-white dark:bg-rose-500",
-    BLOCKED: "bg-amber-600 text-white dark:bg-amber-500",
-    SKIPPED: "bg-teal-600 text-white dark:bg-teal-500",
-    NOT_RUN: "bg-zinc-700 text-white dark:bg-zinc-500",
-    PENDING: "bg-zinc-700 text-white dark:bg-zinc-500",
-    IN_PROGRESS: "bg-indigo-600 text-white dark:bg-indigo-500",
+    PASSED: "bg-emerald-50 text-emerald-700",
+    FAILED: "bg-rose-50 text-rose-700",
+    BLOCKED: "bg-amber-50 text-amber-700",
+    SKIPPED: "bg-teal-50 text-teal-700",
+    NOT_RUN: "bg-zinc-100 text-zinc-600",
+    PENDING: "bg-zinc-100 text-zinc-600",
+    IN_PROGRESS: "bg-indigo-50 text-indigo-700",
   },
   priority: {
-    CRITICAL: "bg-rose-600 text-white dark:bg-rose-500",
-    HIGH: "bg-amber-600 text-white dark:bg-amber-500",
-    MEDIUM: "bg-indigo-600 text-white dark:bg-indigo-500",
-    LOW: "bg-teal-600 text-white dark:bg-teal-500",
+    CRITICAL: "bg-rose-50 text-rose-700",
+    HIGH: "bg-amber-50 text-amber-700",
+    MEDIUM: "bg-indigo-50 text-indigo-700",
+    LOW: "bg-teal-50 text-teal-700",
   },
 };
 
 export function StatusBadge({ kind, value }: { kind: Kind; value: string }) {
-  const color = map[kind][value] || "bg-zinc-700 text-white";
-  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${color}`}>{value.replaceAll("_", " ")}</span>;
+  const light = map[kind][value] || "bg-zinc-100 text-zinc-600";
+  const dark = "dark:bg-zinc-700 dark:text-zinc-100";
+  return <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${light} ${dark}`}>{value.replaceAll("_", " ")}</span>;
 }

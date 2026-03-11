@@ -12,21 +12,24 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <div className="space-y-5 bg-zinc-50 dark:bg-zinc-900">
+    <div className="space-y-6 bg-zinc-50 dark:bg-zinc-950">
       <AppHeader title="Overview Dashboard" />
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <Card>
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">Total Projects</p>
-          <p className="mt-2 text-3xl font-bold tracking-tight">{projects}</p>
+          <p className="text-sm text-zinc-500">Total Projects</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{projects}</p>
+          <p className="mt-2 text-xs text-zinc-400">vs last month</p>
         </Card>
         <Card>
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">Total Test Cases</p>
-          <p className="mt-2 text-3xl font-bold tracking-tight">{totalCases}</p>
+          <p className="text-sm text-zinc-500">Total Test Cases</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{totalCases}</p>
+          <p className="mt-2 text-xs text-zinc-400">vs last month</p>
         </Card>
         <Card>
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">Total Test Plans</p>
-          <p className="mt-2 text-3xl font-bold tracking-tight">{totalPlans}</p>
+          <p className="text-sm text-zinc-500">Total Test Plans</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{totalPlans}</p>
+          <p className="mt-2 text-xs text-zinc-400">vs last month</p>
         </Card>
       </div>
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Card } from "@/components/ui/card";
 
-const COLORS = ["#059669", "#e11d48", "#d97706", "#0d9488", "#3f3f46"];
+const COLORS = ["#10b981", "#6366f1", "#f59e0b", "#e11d48", "#14b8a6"];
 
 type DashboardData = {
   byExecution: Record<string, number>;
@@ -24,12 +24,13 @@ export function DashboardCharts() {
   const barData = Object.entries(data.byStatus).map(([name, value]) => ({ name, value }));
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <Card className="h-80">
-        <h3 className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Execution Status Distribution</h3>
-        <ResponsiveContainer width="100%" height="90%">
+        <h3 className="mb-1 text-base font-semibold text-zinc-900 dark:text-zinc-100">Execution Status Distribution</h3>
+        <p className="mb-3 text-sm text-zinc-500">Overall execution outcomes</p>
+        <ResponsiveContainer width="100%" height="78%">
           <PieChart>
-            <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={95} innerRadius={40}>
+            <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={95} innerRadius={45}>
               {pieData.map((_, index) => (
                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
               ))}
@@ -40,13 +41,15 @@ export function DashboardCharts() {
       </Card>
 
       <Card className="h-80">
-        <h3 className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">Test Case Workflow Status</h3>
-        <ResponsiveContainer width="100%" height="90%">
+        <h3 className="mb-1 text-base font-semibold text-zinc-900 dark:text-zinc-100">Test Case Workflow Status</h3>
+        <p className="mb-3 text-sm text-zinc-500">Draft, in progress, and ready mix</p>
+        <ResponsiveContainer width="100%" height="78%">
           <BarChart data={barData}>
-            <XAxis dataKey="name" />
-            <YAxis allowDecimals={false} />
+            <CartesianGrid stroke="#f4f4f5" strokeDasharray="3 3" />
+            <XAxis dataKey="name" tick={{ fill: "#a1a1aa", fontSize: 12 }} />
+            <YAxis allowDecimals={false} tick={{ fill: "#a1a1aa", fontSize: 12 }} />
             <Tooltip />
-            <Bar dataKey="value" fill="#3f3f46" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="value" fill="#6366f1" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
