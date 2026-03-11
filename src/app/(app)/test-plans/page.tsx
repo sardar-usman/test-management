@@ -61,7 +61,7 @@ export default function TestPlansPage() {
             </option>
           ))}
         </select>
-        <Button onClick={createPlan}>Create</Button>
+        <Button variant="create" onClick={createPlan}>Create</Button>
         <input className={inputClass} placeholder="Search plans" value={query} onChange={(e) => setQuery(e.target.value)} />
       </Card>
 

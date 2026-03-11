@@ -50,7 +50,7 @@ export default function ProjectsPage() {
 
       <Card className="flex flex-wrap gap-2">
         <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder="New project name" />
-        <Button onClick={createProject}>Create</Button>
+        <Button variant="create" onClick={createProject}>Create</Button>
         <input className={inputClass} placeholder="Search projects" value={query} onChange={(e) => setQuery(e.target.value)} />
         <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="ALL">All Status</option>

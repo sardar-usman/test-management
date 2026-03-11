@@ -112,7 +112,7 @@ export default function TestCasesPage() {
               </option>
             ))}
           </select>
-          <Button onClick={createCase}>Create</Button>
+          <Button variant="create" onClick={createCase}>Create</Button>
           <a className="rounded-xl border border-zinc-300 px-4 py-2.5 text-sm text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/api/test-cases/export">
             Export CSV
           </a>
@@ -135,8 +135,8 @@ export default function TestCasesPage() {
             <option>BLOCKED</option>
             <option>SKIPPED</option>
           </select>
-          <Button variant="outline" onClick={() => bulkUpdate("PASSED")}>Bulk → Passed</Button>
-          <Button variant="outline" onClick={() => bulkUpdate("FAILED")}>Bulk → Failed</Button>
+          <Button variant="pass" onClick={() => bulkUpdate("PASSED")}>Bulk → Passed</Button>
+          <Button variant="fail" onClick={() => bulkUpdate("FAILED")}>Bulk → Failed</Button>
         </div>
       </Card>
 
@@ -159,10 +159,10 @@ export default function TestCasesPage() {
                 </label>
 
                 <div className="flex flex-wrap gap-1">
-                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => duplicate(tc.id)}>Duplicate</Button>
-                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "PASSED")}>Pass</Button>
-                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "FAILED")}>Fail</Button>
-                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "BLOCKED")}>Block</Button>
+                  <Button variant="duplicate" className="px-2.5 py-1 text-xs" onClick={() => duplicate(tc.id)}>Duplicate</Button>
+                  <Button variant="pass" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "PASSED")}>Pass</Button>
+                  <Button variant="fail" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "FAILED")}>Fail</Button>
+                  <Button variant="blocked" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "BLOCKED")}>Block</Button>
                 </div>
               </div>
 
