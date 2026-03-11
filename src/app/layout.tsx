@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="bg-zinc-50 text-zinc-900 transition-colors duration-200 dark:bg-zinc-950 dark:text-zinc-100">
+      <body className="bg-zinc-50 text-zinc-900 transition-colors duration-200 dark:bg-black dark:text-white">
         <Providers>{children}</Providers>
       </body>
     </html>

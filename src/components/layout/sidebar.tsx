@@ -15,7 +15,7 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r border-zinc-800 bg-zinc-900 p-4 text-zinc-100">
+    <aside className="w-64 border-r border-zinc-700 bg-zinc-900 p-4 text-white">
       <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-5">
         <p className="text-xs uppercase tracking-wider text-zinc-300">QA Workspace</p>
         <h1 className="mt-1 text-xl font-bold">SprintSynergy</h1>
