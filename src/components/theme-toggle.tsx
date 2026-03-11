@@ -19,7 +19,10 @@ export function ThemeToggle() {
   }
 
   return (
-    <button onClick={toggle} className="rounded border px-3 py-2 text-sm">
+    <button
+      onClick={toggle}
+      className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:hover:bg-slate-800"
+    >
       {theme === "light" ? "🌙 Dark" : "☀️ Light"}
     </button>
   );

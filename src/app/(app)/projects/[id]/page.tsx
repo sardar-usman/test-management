@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { AppHeader } from "@/components/app-header";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Card } from "@/components/ui/card";
 
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -8,13 +9,24 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
   if (!project) return <div>Project not found.</div>;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <Breadcrumbs items={[{ href: "/projects", label: "Projects" }, { label: project.name }]} />
       <AppHeader title={project.name} />
-      <p className="text-slate-600">{project.description}</p>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="rounded border p-4">Test Plans: {project.testPlans.length}</div>
-        <div className="rounded border p-4">Test Cases: {project.testCases.length}</div>
+
+      <Card>
+        <p className="text-sm text-slate-500">Description</p>
+        <p className="mt-2">{project.description || "No description yet."}</p>
+      </Card>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <Card>
+          <p className="text-sm text-slate-500">Test Plans</p>
+          <p className="mt-2 text-3xl font-bold">{project.testPlans.length}</p>
+        </Card>
+        <Card>
+          <p className="text-sm text-slate-500">Test Cases</p>
+          <p className="mt-2 text-3xl font-bold">{project.testCases.length}</p>
+        </Card>
       </div>
     </div>
   );

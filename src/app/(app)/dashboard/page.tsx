@@ -5,16 +5,31 @@ import { DashboardCharts } from "@/components/dashboard-charts";
 import { ActivityFeed } from "@/components/activity-feed";
 
 export default async function DashboardPage() {
-  const [projects, totalCases] = await Promise.all([prisma.project.count(), prisma.testCase.count()]);
+  const [projects, totalCases, totalPlans] = await Promise.all([
+    prisma.project.count(),
+    prisma.testCase.count(),
+    prisma.testPlan.count(),
+  ]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <AppHeader title="Overview Dashboard" />
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <Card>Total Projects: {projects}</Card>
-        <Card>Total Test Cases: {totalCases}</Card>
-        <Card>Real-time execution stats below</Card>
+        <Card>
+          <p className="text-sm text-slate-500">Total Projects</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight">{projects}</p>
+        </Card>
+        <Card>
+          <p className="text-sm text-slate-500">Total Test Cases</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight">{totalCases}</p>
+        </Card>
+        <Card>
+          <p className="text-sm text-slate-500">Total Test Plans</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight">{totalPlans}</p>
+        </Card>
       </div>
+
       <DashboardCharts />
       <ActivityFeed />
     </div>

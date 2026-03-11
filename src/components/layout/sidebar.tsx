@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,16 +13,44 @@ const nav = [
 
 export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
+
   return (
-    <aside className="w-60 border-r border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-      <h1 className="mb-6 text-xl font-bold">SprintSynergy</h1>
-      <nav className="space-y-1">
-        {nav.map(([href, label]) => (
-          <Link key={href} href={href} className={`block rounded px-3 py-2 text-sm ${pathname.startsWith(href) ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"}`}>
-            {label}
+    <aside className="w-64 border-r border-slate-200/70 bg-white/70 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/70">
+      <div className="mb-8 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 px-4 py-5 text-white shadow-lg">
+        <p className="text-xs uppercase tracking-wider text-blue-100">QA Workspace</p>
+        <h1 className="mt-1 text-xl font-bold">SprintSynergy</h1>
+      </div>
+
+      <nav className="space-y-1.5">
+        {nav.map(([href, label]) => {
+          const active = pathname.startsWith(href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`block rounded-xl px-4 py-2.5 text-sm font-medium transition ${
+                active
+                  ? "bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-900"
+                  : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              }`}
+            >
+              {label}
+            </Link>
+          );
+        })}
+
+        {isAdmin && (
+          <Link
+            href="/settings"
+            className={`block rounded-xl px-4 py-2.5 text-sm font-medium transition ${
+              pathname.startsWith("/settings")
+                ? "bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-900"
+                : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+            }`}
+          >
+            Settings
           </Link>
-        ))}
-        {isAdmin && <Link href="/settings" className="block rounded px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">Settings</Link>}
+        )}
       </nav>
     </aside>
   );

@@ -10,7 +10,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex min-h-screen">
       <Sidebar isAdmin={session.user.role === "ADMIN"} />
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-6 lg:p-8">{children}</main>
     </div>
   );
 }
