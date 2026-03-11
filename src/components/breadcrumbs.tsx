@@ -10,7 +10,7 @@ export function Breadcrumbs({ items }: { items: { href?: string; label: string }
               {item.label}
             </Link>
           ) : (
-            <span className="font-medium text-zinc-900 dark:text-white">{item.label}</span>
+            <span className="font-medium text-zinc-900 dark:text-zinc-100">{item.label}</span>
           )}
           {i < items.length - 1 ? <span>/</span> : ""}
         </span>

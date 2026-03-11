@@ -10,7 +10,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-white">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => { try { const t = localStorage.getItem('theme'); if (t === 'dark') document.documentElement.classList.add('dark'); } catch(e){} })();`,
+          }}
+        />
+      </head>
+      <body className="bg-zinc-50 text-zinc-900 transition-colors duration-200 dark:bg-zinc-950 dark:text-zinc-100">
         <Providers>{children}</Providers>
       </body>
     </html>

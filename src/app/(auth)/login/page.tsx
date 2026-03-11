@@ -20,7 +20,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 p-6 dark:bg-zinc-900">
       <div className="w-full max-w-5xl overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900 md:grid md:grid-cols-2">
-        <div className="hidden bg-zinc-900 p-10 text-white md:block">
+        <div className="hidden bg-zinc-900 p-10 text-zinc-100 md:block">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-300">Test Management Suite</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight">SprintSynergy</h1>
           <p className="mt-4 text-zinc-300">
@@ -31,12 +31,12 @@ export default function LoginPage() {
         <form onSubmit={onSubmit} className="space-y-5 p-8 md:p-10">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-300">Welcome back</p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Sign in to your workspace</h2>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Sign in to your workspace</h2>
           </div>
 
           <div className="space-y-3">
             <input
-              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
               type="email"
               placeholder="Email address"
               value={email}
@@ -44,7 +44,7 @@ export default function LoginPage() {
               required
             />
             <input
-              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
               type="password"
               placeholder="Password"
               value={password}
