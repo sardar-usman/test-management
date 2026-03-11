@@ -20,10 +20,10 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <div className="w-full max-w-5xl overflow-hidden rounded-3xl border border-slate-200/70 bg-white/80 shadow-xl backdrop-blur dark:border-slate-800 dark:bg-slate-900/70 md:grid md:grid-cols-2">
-        <div className="hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-10 text-white md:block">
-          <p className="text-xs uppercase tracking-[0.2em] text-blue-100">Test Management Suite</p>
+        <div className="hidden bg-gradient-to-br from-[#9EA8AC] via-[#BAC4C8] to-[#D7E0E3] p-10 text-zinc-900 md:block">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-700">Test Management Suite</p>
           <h1 className="mt-3 text-4xl font-bold leading-tight">SprintSynergy</h1>
-          <p className="mt-4 text-blue-100">
+          <p className="mt-4 text-zinc-700">
             Manage projects, execute manual test cases, and track QA performance with a modern workflow.
           </p>
         </div>
