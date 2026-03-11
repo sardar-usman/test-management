@@ -36,7 +36,7 @@ export default function LoginPage() {
 
           <div className="space-y-3">
             <input
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
+              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
               type="email"
               placeholder="Email address"
               value={email}
@@ -44,7 +44,7 @@ export default function LoginPage() {
               required
             />
             <input
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
+              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
               type="password"
               placeholder="Password"
               value={password}

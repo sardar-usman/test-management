@@ -16,8 +16,8 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
 
   return (
     <aside className="w-64 border-r border-slate-200/70 bg-white/70 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/70">
-      <div className="mb-8 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 px-4 py-5 text-white shadow-lg">
-        <p className="text-xs uppercase tracking-wider text-blue-100">QA Workspace</p>
+      <div className="mb-8 rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-600 px-4 py-5 text-white shadow-lg dark:from-zinc-700 dark:to-zinc-500">
+        <p className="text-xs uppercase tracking-wider text-zinc-200">QA Workspace</p>
         <h1 className="mt-1 text-xl font-bold">SprintSynergy</h1>
       </div>
 

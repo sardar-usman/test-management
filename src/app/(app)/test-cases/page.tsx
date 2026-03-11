@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/app-header";
 import { Card } from "@/components/ui/card";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { Button } from "@/components/ui/button";
 
 type Project = { id: string; name: string };
 type TestCase = {
@@ -16,6 +18,9 @@ type TestCase = {
   assignedTo?: string;
   tags: string[];
 };
+
+const inputClass =
+  "rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100";
 
 export default function TestCasesPage() {
   const [items, setItems] = useState<TestCase[]>([]);
@@ -99,42 +104,30 @@ export default function TestCasesPage() {
 
       <Card className="space-y-3">
         <div className="flex flex-wrap gap-2">
-          <input
-            className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
-            placeholder="Test case title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <select className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950" value={projectId} onChange={(e) => setProjectId(e.target.value)}>
+          <input className={inputClass} placeholder="Test case title" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <select className={inputClass} value={projectId} onChange={(e) => setProjectId(e.target.value)}>
             {projects.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.name}
               </option>
             ))}
           </select>
-          <button className="rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white dark:bg-slate-100 dark:text-slate-900" onClick={createCase}>
-            Create
-          </button>
-          <a className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm dark:border-slate-700" href="/api/test-cases/export">
+          <Button onClick={createCase}>Create</Button>
+          <a className="rounded-xl border border-zinc-300 px-4 py-2.5 text-sm text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/api/test-cases/export">
             Export CSV
           </a>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <input
-            className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
-            placeholder="Search ID/title"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <select className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950" value={priority} onChange={(e) => setPriority(e.target.value)}>
+          <input className={inputClass} placeholder="Search ID/title" value={query} onChange={(e) => setQuery(e.target.value)} />
+          <select className={inputClass} value={priority} onChange={(e) => setPriority(e.target.value)}>
             <option value="ALL">All Priority</option>
             <option>LOW</option>
             <option>MEDIUM</option>
             <option>HIGH</option>
             <option>CRITICAL</option>
           </select>
-          <select className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950" value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="ALL">All Execution</option>
             <option>NOT_RUN</option>
             <option>PASSED</option>
@@ -142,19 +135,15 @@ export default function TestCasesPage() {
             <option>BLOCKED</option>
             <option>SKIPPED</option>
           </select>
-          <button className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm dark:border-slate-700" onClick={() => bulkUpdate("PASSED")}>
-            Bulk → Passed
-          </button>
-          <button className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm dark:border-slate-700" onClick={() => bulkUpdate("FAILED")}>
-            Bulk → Failed
-          </button>
+          <Button variant="outline" onClick={() => bulkUpdate("PASSED")}>Bulk → Passed</Button>
+          <Button variant="outline" onClick={() => bulkUpdate("FAILED")}>Bulk → Failed</Button>
         </div>
       </Card>
 
       <div className="space-y-3">
         {filtered.length === 0 ? (
           <Card>
-            <p className="text-sm text-slate-500">No test cases match your filter.</p>
+            <p className="text-sm text-zinc-500">No test cases match your filter.</p>
           </Card>
         ) : (
           filtered.map((tc) => (
@@ -164,31 +153,23 @@ export default function TestCasesPage() {
                   <input
                     type="checkbox"
                     checked={selected.includes(tc.id)}
-                    onChange={(e) =>
-                      setSelected((prev) => (e.target.checked ? [...prev, tc.id] : prev.filter((x) => x !== tc.id)))
-                    }
+                    onChange={(e) => setSelected((prev) => (e.target.checked ? [...prev, tc.id] : prev.filter((x) => x !== tc.id)))}
                   />
                   {tc.testCaseId} · {tc.title}
                 </label>
 
                 <div className="flex flex-wrap gap-1">
-                  <button className="rounded-lg border px-2.5 py-1 text-xs" onClick={() => duplicate(tc.id)}>
-                    Duplicate
-                  </button>
-                  <button className="rounded-lg border px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "PASSED")}>
-                    Pass
-                  </button>
-                  <button className="rounded-lg border px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "FAILED")}>
-                    Fail
-                  </button>
-                  <button className="rounded-lg border px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "BLOCKED")}>
-                    Block
-                  </button>
+                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => duplicate(tc.id)}>Duplicate</Button>
+                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "PASSED")}>Pass</Button>
+                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "FAILED")}>Fail</Button>
+                  <Button variant="outline" className="px-2.5 py-1 text-xs" onClick={() => execute(tc.id, "BLOCKED")}>Block</Button>
                 </div>
               </div>
 
-              <div className="text-sm text-slate-500">
-                {tc.priority} · {tc.status} · {tc.executionStatus}
+              <div className="flex flex-wrap gap-2 text-sm">
+                <StatusBadge kind="priority" value={tc.priority} />
+                <StatusBadge kind="plan" value={tc.status} />
+                <StatusBadge kind="execution" value={tc.executionStatus} />
               </div>
             </Card>
           ))

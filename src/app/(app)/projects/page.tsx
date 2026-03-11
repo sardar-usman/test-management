@@ -5,8 +5,13 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/app-header";
 import { Card } from "@/components/ui/card";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { Button } from "@/components/ui/button";
 
 type Project = { id: string; name: string; description?: string; status: "ACTIVE" | "COMPLETED" | "ON_HOLD" };
+
+const inputClass =
+  "rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -44,24 +49,10 @@ export default function ProjectsPage() {
       <AppHeader title="Projects" />
 
       <Card className="flex flex-wrap gap-2">
-        <input
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="New project name"
-        />
-        <button className="rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white dark:bg-slate-100 dark:text-slate-900" onClick={createProject}>
-          Create
-        </button>
-
-        <input
-          className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none ring-blue-400 focus:ring-2 dark:border-slate-700 dark:bg-slate-950"
-          placeholder="Search projects"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-
-        <select className="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950" value={status} onChange={(e) => setStatus(e.target.value)}>
+        <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder="New project name" />
+        <Button onClick={createProject}>Create</Button>
+        <input className={inputClass} placeholder="Search projects" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="ALL">All Status</option>
           <option value="ACTIVE">Active</option>
           <option value="COMPLETED">Completed</option>
@@ -72,7 +63,7 @@ export default function ProjectsPage() {
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.length === 0 ? (
           <Card className="md:col-span-2 xl:col-span-3">
-            <p className="text-sm text-slate-500">No projects found. Create one to get started.</p>
+            <p className="text-sm text-zinc-500">No projects found. Create one to get started.</p>
           </Card>
         ) : (
           filtered.map((p) => (
@@ -80,9 +71,9 @@ export default function ProjectsPage() {
               <Card className="h-full hover:-translate-y-0.5">
                 <div className="flex items-start justify-between">
                   <h3 className="font-semibold">{p.name}</h3>
-                  <span className="rounded-full bg-slate-100 px-2 py-1 text-xs dark:bg-slate-800">{p.status}</span>
+                  <StatusBadge kind="project" value={p.status} />
                 </div>
-                <p className="mt-2 text-sm text-slate-500">{p.description || "No description yet."}</p>
+                <p className="mt-2 text-sm text-zinc-500">{p.description || "No description yet."}</p>
               </Card>
             </Link>
           ))
