@@ -44,35 +44,61 @@ export default function TestCasesPage() {
   const [submittingExecution, setSubmittingExecution] = useState(false);
 
   async function load() {
-    const [cases, prjs] = await Promise.all([
-      fetch("/api/test-cases").then((r) => r.json()),
-      fetch("/api/projects").then((r) => r.json()),
-    ]);
-    setItems(cases);
-    setProjects(prjs);
-    if (prjs[0] && !projectId) setProjectId(prjs[0].id);
+    try {
+      const [casesRes, projectsRes] = await Promise.all([fetch("/api/test-cases"), fetch("/api/projects")]);
+      if (!casesRes.ok || !projectsRes.ok) throw new Error("Failed to load test data");
+
+      const [cases, prjs] = await Promise.all([casesRes.json(), projectsRes.json()]);
+      setItems(cases);
+      setProjects(prjs);
+      if (prjs[0] && !projectId) setProjectId(prjs[0].id);
+    } catch {
+      toast.error("Could not load test cases/projects. Please refresh.");
+    }
   }
 
   useEffect(() => {
     load();
   }, []);
 
+  useEffect(() => {
+    if (!executionDialog) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !submittingExecution) setExecutionDialog(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [executionDialog, submittingExecution]);
+
   async function createCase() {
     if (!title.trim()) return toast.error("Title required");
-    await fetch("/api/test-cases", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, projectId, steps: [{ action: "Open app", expectedResult: "App opens" }] }),
-    });
-    setTitle("");
-    toast.success("Test case created");
-    load();
+
+    try {
+      const response = await fetch("/api/test-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, projectId, steps: [{ action: "Open app", expectedResult: "App opens" }] }),
+      });
+
+      if (!response.ok) throw new Error("Create failed");
+
+      setTitle("");
+      toast.success("Test case created");
+      load();
+    } catch {
+      toast.error("Could not create test case.");
+    }
   }
 
   async function duplicate(id: string) {
-    await fetch(`/api/test-cases/${id}`, { method: "POST" });
-    toast.success("Test case duplicated");
-    load();
+    try {
+      const response = await fetch(`/api/test-cases/${id}`, { method: "POST" });
+      if (!response.ok) throw new Error("Duplicate failed");
+      toast.success("Test case duplicated");
+      load();
+    } catch {
+      toast.error("Could not duplicate test case.");
+    }
   }
 
   function openExecutionDialog(tc: TestCase, executionStatus: "PASSED" | "FAILED" | "BLOCKED") {
@@ -87,21 +113,38 @@ export default function TestCasesPage() {
 
   async function submitExecution() {
     if (!executionDialog) return;
+
+    const url = executionDialog.evidenceUrl.trim();
+    if (url) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.protocol !== "http:" && parsed.protocol !== "https:") throw new Error("Invalid protocol");
+      } catch {
+        toast.error("Please enter a valid evidence URL (http/https).");
+        return;
+      }
+    }
+
     setSubmittingExecution(true);
     try {
-      await fetch(`/api/test-cases/${executionDialog.id}/execute`, {
+      const response = await fetch(`/api/test-cases/${executionDialog.id}/execute`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           executionStatus: executionDialog.executionStatus,
           actualResult: executionDialog.executionStatus,
           comments: executionDialog.comments || "Updated from UI",
-          evidenceUrl: executionDialog.evidenceUrl,
+          evidenceUrl: url,
         }),
       });
+
+      if (!response.ok) throw new Error("Execution update failed");
+
       toast.success(`Execution set to ${executionDialog.executionStatus}`);
       setExecutionDialog(null);
       load();
+    } catch {
+      toast.error("Could not save execution status.");
     } finally {
       setSubmittingExecution(false);
     }
@@ -109,14 +152,22 @@ export default function TestCasesPage() {
 
   async function bulkUpdate(newStatus: string) {
     if (selected.length === 0) return toast.error("Select at least one case");
-    await fetch("/api/test-cases", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ids: selected, executionStatus: newStatus }),
-    });
-    toast.success("Bulk status updated");
-    setSelected([]);
-    load();
+
+    try {
+      const response = await fetch("/api/test-cases", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: selected, executionStatus: newStatus }),
+      });
+
+      if (!response.ok) throw new Error("Bulk update failed");
+
+      toast.success("Bulk status updated");
+      setSelected([]);
+      load();
+    } catch {
+      toast.error("Could not apply bulk status update.");
+    }
   }
 
   const filtered = useMemo(
@@ -260,6 +311,7 @@ export default function TestCasesPage() {
               <div>
                 <label className="mb-1 block text-xs uppercase tracking-wide muted-text">Evidence URL (optional)</label>
                 <input
+                  type="url"
                   className="input-field w-full"
                   placeholder="https://..."
                   value={executionDialog.evidenceUrl}
