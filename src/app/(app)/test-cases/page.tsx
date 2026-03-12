@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/app-header";
@@ -19,8 +20,7 @@ type TestCase = {
   tags: string[];
 };
 
-const inputClass =
-  "rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100";
+const inputClass = "input-field";
 
 export default function TestCasesPage() {
   const [items, setItems] = useState<TestCase[]>([]);
@@ -113,9 +113,9 @@ export default function TestCasesPage() {
             ))}
           </select>
           <Button variant="create" onClick={createCase}>Create</Button>
-          <a className="rounded-xl border border-zinc-300 px-4 py-2.5 text-sm text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/api/test-cases/export">
+          <Link className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-sm text-[var(--text-body)] hover:bg-[var(--surface-2)]" href="/api/test-cases/export">
             Export CSV
-          </a>
+          </Link>
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function TestCasesPage() {
       <div className="space-y-3">
         {filtered.length === 0 ? (
           <Card>
-            <p className="text-sm text-zinc-500">No test cases match your filter.</p>
+            <p className="text-sm muted-text">No test cases match your filter.</p>
           </Card>
         ) : (
           filtered.map((tc) => (

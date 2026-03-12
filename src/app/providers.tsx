@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         position="top-right"
         toastOptions={{
           className:
-            "!rounded-xl !border !border-zinc-200 !bg-white !text-zinc-900 dark:!border-zinc-800 dark:!bg-zinc-900 dark:!text-zinc-100",
+            "!rounded-xl !border !border-[var(--border)] !bg-[var(--surface)] !text-[var(--text)]",
         }}
       />
     </SessionProvider>

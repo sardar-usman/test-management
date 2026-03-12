@@ -2,35 +2,35 @@ type Kind = "project" | "plan" | "execution" | "priority";
 
 const map: Record<Kind, Record<string, string>> = {
   project: {
-    ACTIVE: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
-    COMPLETED: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
-    ON_HOLD: "bg-amber-50 text-amber-800 dark:bg-amber-900 dark:text-amber-400",
+    ACTIVE: "[background:var(--success-soft)] [color:var(--success)]",
+    COMPLETED: "[background:var(--success-soft)] [color:var(--success)]",
+    ON_HOLD: "[background:var(--warning-soft)] [color:var(--warning)]",
   },
   plan: {
-    DRAFT: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400",
-    ACTIVE: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
-    COMPLETED: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
-    IN_PROGRESS: "bg-indigo-50 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-400",
-    PENDING: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400",
+    DRAFT: "[background:var(--surface-3)] [color:var(--text-secondary)]",
+    ACTIVE: "[background:var(--success-soft)] [color:var(--success)]",
+    COMPLETED: "[background:var(--success-soft)] [color:var(--success)]",
+    IN_PROGRESS: "[background:var(--accent-soft)] [color:var(--accent)]",
+    PENDING: "[background:var(--surface-3)] [color:var(--text-secondary)]",
   },
   execution: {
-    PASSED: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
-    FAILED: "bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-400",
-    BLOCKED: "bg-amber-50 text-amber-800 dark:bg-amber-900 dark:text-amber-400",
-    SKIPPED: "bg-cyan-50 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-400",
-    NOT_RUN: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400",
-    PENDING: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400",
-    IN_PROGRESS: "bg-indigo-50 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-400",
+    PASSED: "[background:var(--success-soft)] [color:var(--success)]",
+    FAILED: "[background:var(--danger-soft)] [color:var(--danger)]",
+    BLOCKED: "[background:var(--warning-soft)] [color:var(--warning)]",
+    SKIPPED: "[background:var(--info-soft)] [color:var(--info)]",
+    NOT_RUN: "[background:var(--surface-3)] [color:var(--text-secondary)]",
+    PENDING: "[background:var(--surface-3)] [color:var(--text-secondary)]",
+    IN_PROGRESS: "[background:var(--accent-soft)] [color:var(--accent)]",
   },
   priority: {
-    CRITICAL: "bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-400",
-    HIGH: "bg-amber-50 text-amber-800 dark:bg-amber-900 dark:text-amber-400",
-    MEDIUM: "bg-indigo-50 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-400",
-    LOW: "bg-emerald-50 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-400",
+    CRITICAL: "[background:var(--danger-soft)] [color:var(--danger)]",
+    HIGH: "[background:var(--warning-soft)] [color:var(--warning)]",
+    MEDIUM: "[background:var(--accent-soft)] [color:var(--accent)]",
+    LOW: "[background:var(--success-soft)] [color:var(--success)]",
   },
 };
 
 export function StatusBadge({ kind, value }: { kind: Kind; value: string }) {
-  const color = map[kind][value] || "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400";
+  const color = map[kind][value] || "[background:var(--surface-3)] [color:var(--text-secondary)]";
   return <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${color}`}>{value.replaceAll("_", " ")}</span>;
 }
