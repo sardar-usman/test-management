@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LogoutButton } from "@/components/logout-button";
 
 export function AppHeader({ title }: { title: string }) {
   return (
@@ -7,7 +8,10 @@ export function AppHeader({ title }: { title: string }) {
         <h1 className="text-2xl font-bold tracking-tight text-[var(--text)]">{title}</h1>
         <p className="text-sm text-[var(--text-secondary)]">Clean, minimal QA workflow dashboard</p>
       </div>
-      <ThemeToggle />
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+        <LogoutButton />
+      </div>
     </div>
   );
 }
