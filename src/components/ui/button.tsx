@@ -4,21 +4,21 @@ type Variant = "primary"|"secondary"|"outline"|"pass"|"fail"|"blocked"|"skipped"
 
 export function Button({ variant = "primary", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant }) {
   const styles: Record<Variant, string> = {
-    primary: "bg-indigo-600 text-white hover:bg-indigo-700",
-    secondary: "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300",
-    outline: "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300",
-    create: "bg-indigo-600 text-white hover:bg-indigo-700",
-    pass: "bg-emerald-600 text-white hover:bg-emerald-700",
-    fail: "bg-red-600 text-white hover:bg-red-700",
-    blocked: "bg-amber-600 text-white hover:bg-amber-700",
-    skipped: "bg-cyan-600 text-white hover:bg-cyan-700",
-    pending: "bg-slate-700 text-white hover:bg-slate-800",
-    progress: "bg-indigo-600 text-white hover:bg-indigo-700",
-    draft: "bg-white border border-slate-400 text-slate-700 hover:bg-slate-50 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300",
-    duplicate: "bg-violet-600 text-white hover:bg-violet-700",
-    delete: "bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-900 dark:text-red-400",
-    edit: "bg-indigo-50 text-indigo-600 hover:bg-indigo-100 dark:bg-indigo-950 dark:text-indigo-400",
+    primary: "text-white [background:var(--accent)] hover:[background:var(--accent-hover)]",
+    secondary: "border [border-color:var(--border)] [background:var(--surface)] [color:var(--text-body)] hover:[background:var(--surface-2)]",
+    outline: "border [border-color:var(--border)] [background:var(--surface)] [color:var(--text-body)] hover:[background:var(--surface-2)]",
+    create: "text-white [background:var(--accent)] hover:[background:var(--accent-hover)]",
+    pass: "text-white [background:var(--success)] hover:brightness-110",
+    fail: "text-white [background:var(--danger)] hover:brightness-110",
+    blocked: "text-white [background:var(--warning)] hover:brightness-110",
+    skipped: "text-white [background:var(--info)] hover:brightness-110",
+    pending: "text-white [background:var(--text-secondary)] hover:brightness-110",
+    progress: "text-white [background:var(--accent)] hover:[background:var(--accent-hover)]",
+    draft: "border [border-color:var(--border)] [background:var(--surface)] [color:var(--text-body)] hover:[background:var(--surface-2)]",
+    duplicate: "text-white bg-violet-600 hover:bg-violet-700",
+    delete: "[background:var(--danger-soft)] [color:var(--danger)] hover:brightness-95",
+    edit: "[background:var(--accent-soft)] [color:var(--accent)] hover:brightness-95",
   };
 
-  return <button className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-colors duration-150 ${styles[variant]} ${className}`} {...props} />;
+  return <button className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:[--tw-ring-color:var(--ring)] ${styles[variant]} ${className}`} {...props} />;
 }

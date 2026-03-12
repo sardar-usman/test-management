@@ -10,8 +10,7 @@ import { Button } from "@/components/ui/button";
 type Project = { id: string; name: string };
 type Plan = { id: string; title: string; status: string; priority: string; project: Project };
 
-const inputClass =
-  "rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 outline-none ring-zinc-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100";
+const inputClass = "input-field";
 
 export default function TestPlansPage() {
   const [plans, setPlans] = useState<Plan[]>([]);
@@ -68,13 +67,13 @@ export default function TestPlansPage() {
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {filtered.length === 0 ? (
           <Card className="md:col-span-2 xl:col-span-3">
-            <p className="text-sm text-zinc-500">No test plans yet.</p>
+            <p className="text-sm muted-text">No test plans yet.</p>
           </Card>
         ) : (
           filtered.map((p) => (
             <Card key={p.id}>
               <h3 className="font-semibold">{p.title}</h3>
-              <p className="mt-1 text-sm text-zinc-500">{p.project?.name}</p>
+              <p className="mt-1 text-sm muted-text">{p.project?.name}</p>
               <div className="mt-2 flex gap-2">
                 <StatusBadge kind="plan" value={p.status} />
                 <StatusBadge kind="priority" value={p.priority} />

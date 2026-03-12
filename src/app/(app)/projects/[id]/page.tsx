@@ -14,17 +14,17 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
       <AppHeader title={project.name} />
 
       <Card>
-        <p className="text-sm text-zinc-600 dark:text-zinc-300">Description</p>
+        <p className="text-sm subtle-text">Description</p>
         <p className="mt-2">{project.description || "No description yet."}</p>
       </Card>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Card>
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">Test Plans</p>
+          <p className="text-sm subtle-text">Test Plans</p>
           <p className="mt-2 text-3xl font-bold">{project.testPlans.length}</p>
         </Card>
         <Card>
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">Test Cases</p>
+          <p className="text-sm subtle-text">Test Cases</p>
           <p className="mt-2 text-3xl font-bold">{project.testCases.length}</p>
         </Card>
       </div>

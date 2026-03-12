@@ -11,8 +11,8 @@ export default async function SettingsPage() {
     <div className="space-y-5">
       <AppHeader title="Admin Settings" />
       <Card>
-        <p className="text-sm text-zinc-600 dark:text-zinc-300">Only admin can view this section.</p>
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-700 dark:text-zinc-200">
+        <p className="text-sm subtle-text">Only admin can view this section.</p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm [color:var(--text-body)]">
           <li>Manage system defaults</li>
           <li>Future: team/user management</li>
           <li>Future: integrations</li>

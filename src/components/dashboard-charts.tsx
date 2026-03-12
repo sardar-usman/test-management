@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Card } from "@/components/ui/card";
 
-const COLORS = ["#10b981", "#6366f1", "#f59e0b", "#e11d48", "#14b8a6"];
+const COLORS = ["#22c55e", "#6366f1", "#f59e0b", "#ef4444", "#06b6d4"];
 
 type DashboardData = {
   byExecution: Record<string, number>;
@@ -26,8 +26,8 @@ export function DashboardCharts() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <Card className="h-80">
-        <h3 className="mb-1 text-base font-semibold text-zinc-900 dark:text-zinc-100">Execution Status Distribution</h3>
-        <p className="mb-3 text-sm text-zinc-500">Overall execution outcomes</p>
+        <h3 className="mb-1 text-base font-semibold text-[var(--text)]">Execution Status Distribution</h3>
+        <p className="mb-3 text-sm muted-text">Overall execution outcomes</p>
         <ResponsiveContainer width="100%" height="78%">
           <PieChart>
             <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={95} innerRadius={45}>
@@ -41,8 +41,8 @@ export function DashboardCharts() {
       </Card>
 
       <Card className="h-80">
-        <h3 className="mb-1 text-base font-semibold text-zinc-900 dark:text-zinc-100">Test Case Workflow Status</h3>
-        <p className="mb-3 text-sm text-zinc-500">Draft, in progress, and ready mix</p>
+        <h3 className="mb-1 text-base font-semibold text-[var(--text)]">Test Case Workflow Status</h3>
+        <p className="mb-3 text-sm muted-text">Draft, in progress, and ready mix</p>
         <ResponsiveContainer width="100%" height="78%">
           <BarChart data={barData}>
             <CartesianGrid stroke="#f4f4f5" strokeDasharray="3 3" />
